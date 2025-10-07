@@ -3,13 +3,13 @@ import tokioLogo from "./assets/tmhcc-logo-white.png";
 import "./App.css";
 
 function App() {
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(1);
 
   const handleClick = async () => {
     const response = await fetch(`http://127.0.0.1:8000/policies/${id + 1}`);
     const data = await response.json();
 
-    setId(data.policy.id);
+    setId(data.id);
   }
 
   return (
