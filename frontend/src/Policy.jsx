@@ -3,8 +3,6 @@ const Policy = ({ policy }) => {
         return;
     }
 
-    console.log(policy);
-
     return (
         <>
             <h2>Policy Details</h2>
@@ -37,7 +35,7 @@ const Policy = ({ policy }) => {
                     </tr>
                     <tr>
                         <td>Auto renews</td>
-                        <td><input type="checkbox" checked={policy.autoRenews} readOnly /></td>
+                        <td><input id="auto-renews" type="checkbox" checked={policy.autoRenews} readOnly /></td>
                     </tr>
                 </tbody>
             </table>
