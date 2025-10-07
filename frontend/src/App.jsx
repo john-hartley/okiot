@@ -1,9 +1,11 @@
 import { useState } from "react";
 import tokioLogo from "./assets/tmhcc-logo-white.png";
 import "./App.css";
+import Policy from "./Policy";
 
 function App() {
   const [id, setId] = useState(1);
+  const [policy, setPolicy] = useState(null);
 
   const handleChange = e => {
     setId(e.target.value);
@@ -13,10 +15,20 @@ function App() {
     if (!id) {
       return;
     }
-    const response = await fetch(`http://127.0.0.1:8000/policies/${id}`);
-    const data = await response.json();
 
-    console.log(data);
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/policies/${id}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        return;
+      }
+
+      setPolicy(data);
+    } catch (exception) {
+      console.error(exception.message);
+      setPolicy(null);
+    }
   }
 
   return (
@@ -31,6 +43,7 @@ function App() {
         <input type="number" value={id} placeholder="Enter a policy id" onChange={handleChange} />
         <button onClick={handleClick}>Load Policy</button>
       </div>
+      <Policy policy={policy} />
     </main>
   )
 }
