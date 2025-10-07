@@ -39,7 +39,7 @@ function App() {
         </a>
       </nav>
       <h1>Policies</h1>
-      <div>
+      <div className="policy-selection">
         <input type="number" value={id} placeholder="Enter a policy id" onChange={handleChange} />
         <button onClick={handleClick}>Load Policy</button>
       </div>
