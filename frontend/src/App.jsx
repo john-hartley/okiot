@@ -5,23 +5,30 @@ import "./App.css";
 function App() {
   const [id, setId] = useState(1);
 
+  const handleChange = e => {
+    setId(e.target.value);
+  }
+
   const handleClick = async () => {
-    const response = await fetch(`http://127.0.0.1:8000/policies/${id + 1}`);
+    if (!id) {
+      return;
+    }
+    const response = await fetch(`http://127.0.0.1:8000/policies/${id}`);
     const data = await response.json();
 
-    setId(data.id);
+    console.log(data);
   }
 
   return (
     <main>
       <nav>
         <a href="https://www.tmhcc.com/en/" target="_blank">
-          <img src={tokioLogo} className="logo" alt="Tokio logo" />
+          <img src={tokioLogo} alt="Tokio logo" />
         </a>
       </nav>
       <h1>Policies</h1>
-      <div className="">
-        <div>{id}</div>
+      <div>
+        <input type="number" value={id} placeholder="Enter a policy id" onChange={handleChange} />
         <button onClick={handleClick}>Load Policy</button>
       </div>
     </main>
